@@ -43,7 +43,7 @@
 Quat base = {1, 0, 0, 0};
 
 // Variables to calculate the delta time.
-double current_time, previous_time, deltatime;
+float current_time, previous_time, deltatime;
 
 // This setup function will depend on your gyro and also the baud rate 
 // for serial.
