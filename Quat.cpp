@@ -58,7 +58,7 @@ Vect Vect::To_Degrees(){
   return ypr;
 }
 
-Quat Quat::Update(Vect v, double dt) {
+Quat Quat::Update(Vect v, float dt) {
     Quat q;
     
     Quat q_half = {w * 0.5f, i * 0.5, j * 0.5f, k * 0.5,};
@@ -73,7 +73,7 @@ Quat Quat::Update(Vect v, double dt) {
     j += q.j * dt;
     k += q.k * dt;
 
-    double norm = sqrt(w * w + i * i + j * j + k * k);
+    float norm = sqrt(w * w + i * i + j * j + k * k);
  
     Quat b = {w, i, j, k};
 
