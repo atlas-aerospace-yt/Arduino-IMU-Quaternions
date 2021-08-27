@@ -41,16 +41,15 @@
 #define PI 3.14159
 
 struct Vect {
-    double x, y, z;
+    float x, y, z;
 
     Vect To_Radians();
     Vect To_Degrees();
 };
 
 struct Quat {
-    double w, i, j, k;
-
-
+    float w, i, j, k;
+    
     Quat operator/= (float f) {
         Quat q;
 
@@ -62,6 +61,6 @@ struct Quat {
         return q;
     }
 
-    Quat Update(Vect v, double dt);
+    Quat Update(Vect v, float dt);
     Vect To_Euler();
 };
