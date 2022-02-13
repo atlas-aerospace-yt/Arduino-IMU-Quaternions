@@ -59,35 +59,22 @@ Vect Vect::To_Degrees(){
 }
 
 Quat Quat::Update(Vect v, float dt) {
-    Quat q;
-    
-    Quat q_half = {w * 0.5f, i * 0.5, j * 0.5f, k * 0.5,};
-    
-    q.w = -q_half.i * v.x - q_half.j * v.y - q_half.k * v.z;
-    q.i = q_half.w * v.x - q_half.k * v.y + q_half.j * v.z;
-    q.j = q_half.k * v.x + q_half.w * v.y - q_half.i * v.z;
-    q.k = -q_half.j * v.x + q_half.i * v.y + q_half.w * v.z;
 
-    w += q.w * dt;
-    i += q.i * dt;
-    j += q.j * dt;
-    k += q.k * dt;
+    Quat b = {0, v.x, v.y, v.z};
+    Quat r = {w, i, j, k};
 
-    float norm = sqrt(w * w + i * i + j * j + k * k);
- 
-    Quat b = {w, i, j, k};
-
-    b /= norm;
+    Quat q = r * 0.5 * b; 
+    Quat n = r + q * dt;
     
-    return b;
+    return n;
 }
 
 Vect Quat::To_Euler() {
     Vect ypr;
 
-    ypr.x = atan2(2.0f * (i * j + w * k), w * w + i * i - j * j - k * k);
-    ypr.y = -asin(2.0f * (i * k - w * j));
-    ypr.z = atan2(2.0f * (w * i + j * k), w * w - i * i - j * j + k * k);
-
-    return ypr;
+    ypr.x = atan2(2 * i * j - 2 * w * k, 2 * w * w + 2 * i * i - 1);
+    ypr.y = -asin(2 * i * k + 2 * w * j);
+    ypr.z = atan2(2 * j * k - 2 * w * i, 2 * w * w + 2 * k * k - 1);
+    
+    return ypr; 
 }
