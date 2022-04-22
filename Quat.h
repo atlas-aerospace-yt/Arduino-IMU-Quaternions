@@ -36,9 +36,11 @@
 * https://www.youtube.com/channel/UCWd6oqc8nbL-EX3Cxxk8wFA
 */
 
+// WARNING: USE AT OWN RISK, THIS CODE HAS NOT BEEN FULLY TESTED
+
 #pragma once
 #include "math.h"
-#define PI 3.14159
+#define PI 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067
 
 struct Vect {
     float x, y, z;
@@ -62,15 +64,15 @@ struct Vect {
 
       return v;
     }
-      
+
     Vect To_Radians();
     Vect To_Degrees();
 };
 
 struct Quat {
-  
-    float w, i, j, k;
-    
+
+    float w, i, j, k, norm;
+
     Quat operator/ (float f) {
         Quat q;
 
@@ -81,7 +83,7 @@ struct Quat {
 
         return q;
     }
-    
+
     Quat operator* (Quat q){
       Quat r;
 
@@ -89,7 +91,7 @@ struct Quat {
       r.i = w * q.i + i * q.w + j * q.k - k * q.j;
       r.j = w * q.j - i * q.k + j * q.w + k * q.i;
       r.k = w * q.k + i * q.j - j * q.i + k * q.w;
-      
+
       return r;
     }
 
@@ -103,7 +105,7 @@ struct Quat {
 
       return q;
     }
-    
+
     Quat operator+ (Quat q){
       Quat r;
 
@@ -136,7 +138,7 @@ struct Quat {
 
       return r;
     }
-    
+
     Quat operator- (float f){
       Quat r;
 
